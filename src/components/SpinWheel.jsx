@@ -12,33 +12,42 @@ const generateColors = (count) => {
     return colors;
 };
 
+
 const SpinWheel = () => {
     const [angle, setAngle] = useState(0);
-
     // isSpinning state for disabling spin button while spinning
     const [isSpinning, setIsSpinning] = useState(false);
     const [win, setWin] = useState(null);
-
+    const [winMessage, setWinMessage] = useState("")
     const prizes = ['1$', '50$', 'NOTHING', '100$', '5$', 'JACKPOT', '8', '9', '10', '0', 'ZERO', 'TRY AGAIN', 'Wai Wai', 'Happy Happy', 'Good day']
     // '4', '5', '6', 'JACKPOT', 'NOTHING'
     const [bgcolors] = useState(generateColors(prizes.length));
-    console.log({ angle: angle, win })
+
+    console.log({ angle: angle, win, bgcolors })
+
     const spin = () => {
 
         if (isSpinning) return;
         setAngle(0)
         setIsSpinning(true);
         setWin(null);
+        setWinMessage('')
 
         const newAngle = angle + 360 * 5 + Math.floor(Math.random() * 360);
         setAngle(newAngle);
 
         setTimeout(() => {
-            const winningIndex = calculateWinner(newAngle);
-            setWin(prizes[winningIndex])
+            const selectedIndex = calculateWinner(newAngle);
+            setWin(prizes[selectedIndex])
+            if (prizes[selectedIndex] === 'NOTHING')
+                setWinMessage(`Oops! you won ${prizes[selectedIndex]}`)
+            else
+                setWinMessage(`Hurrah! you won ${prizes[selectedIndex]}`)
             setIsSpinning(false);
         }, 5000); // Duration of the spin
     };
+
+
 
     const calculateWinner = (finalAngle) => {
         const normalizedAngle = finalAngle % 360;
@@ -47,9 +56,11 @@ const SpinWheel = () => {
         return winningIndex;
     }
 
+
     return (
         <>
             <div className='container'>
+                <div className="tag">Spinning Wheel Game</div>
                 <div className="spin-wheel-container">
                     <div className='pointer'></div>
                     <div
@@ -71,8 +82,10 @@ const SpinWheel = () => {
                             return (
                                 <div className="segment" key={index} style={{
                                     transform: `rotate(${(index) * (360 / prizes.length)}deg)`
+
                                 }}>
-                                    <p>{prize}</p>
+
+                                    <p style={{ transform: "rotate(306deg) translateX(-40px)", paddingRight: "0px" }}>{prize}</p>
                                 </div>
                             )
                         }
@@ -84,8 +97,8 @@ const SpinWheel = () => {
                     {isSpinning ? 'Spinning...' : 'Spin'}
                 </button>
 
-                <div className="winner">
-                    {(win) ? ` Hurrah! You won ${win} ` : "Please try again."}
+                <div className="win">
+                    {(win) ? `${winMessage}` : "Please Spin to win the prize."}
                 </div>
             </div>
         </>

@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@300;400;500;600;700&display=swap');
+
+
 .container{
     height: 100vh;
     width:100vw;
@@ -9,6 +12,15 @@
     background-image: linear-gradient(to right top, #060A18, #004d7a, #060A18, #060A18, #060A18);
 overflow:hidden;
 
+}
+
+.tag{
+  font-family: 'Dancing Script', cursive;
+font-weight: bold;
+font-size:45px;
+background: linear-gradient(to right, #f32170, #ff6b08,#cf23cf, #eedd44);
+-webkit-text-fill-color: transparent;
+-webkit-background-clip: text;
 }
 
 .spin-wheel-container {
@@ -32,7 +44,7 @@ justify-content: center;
     border: 10px solid #dcba5f;
     position: relative;
     transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1);
-/* overflow:hidden;   */
+overflow:hidden;  
 }
   
   .segment {
@@ -46,19 +58,28 @@ justify-content: center;
     text-align: center;
     padding-top: 40px;
     box-sizing: border-box;
+    
   }
 
-  .segment p{
-    transform: translateX(-40px) rotate(300deg)
-  }
+  /* .segment p{
+    transform: translateX(-40px) rotate(300deg);
+ 
+  } */
   
   button {
     height: 50px;
-    width: 150px;
+    width: 250px;
     margin-top: 20px;
-    padding: 10px 20px;
+    padding: auto;
     font-size: 16px;
     cursor: pointer;
+    border:none;
+    border-radius:50px;
+    background: linear-gradient(to right, #f32170, #ff6b08,#cf23cf, #eedd44);
+    font-family: 'Dancing Script', cursive;
+font-weight: 500;
+font-size: 30px;
+color:#d1b5b5;
   }
   
   .pointer {
@@ -72,4 +93,11 @@ justify-content: center;
     left: 50%;
     transform:  translateX(-50%);
     z-index: 1;
+}
+
+.win{
+  margin-top: 20px;
+  color:#dcba5f;
+  font-family: 'Dancing Script', cursive;
+font-size: 30px;
 }
